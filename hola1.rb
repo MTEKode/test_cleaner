@@ -1,12 +1,18 @@
 # frozen_literal_string
 
-class Hola
+class GitTest
 
-  def pepito
-    123
+  def self.create_branch(n)
+    branch_name = "test_#{n}"
+    `git checkout -b #{branch_name}`
+    File.new("#{branch_name}.txt", 'w').close
+    `git add '#{branch_name}.txt'`
+    `git commit -m '#{branch_name} added'`
+    `git push`
   end
 
-  def manolo
-    456
-  end
+end
+
+10.times do |n|
+  GitTest.create_branch(n)
 end
